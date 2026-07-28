@@ -6,14 +6,112 @@
 //
 
 import Testing
+import Foundation
 @testable import Swipe_Out
 
-struct Swipe_OutTests {
+@MainActor
+struct ReviewViewModelTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-        // Swift Testing Documentation
-        // https://developer.apple.com/documentation/testing
+    //MARK: - Helper
+    private func makeSUT(mock: MockPhotoLibraryService) async -> ReviewViewModel {
+        let sut = ReviewViewModel(library: mock)
+        await sut.requestAccess()
+        return sut
     }
 
+    
+    //MARK: - Tests Functions
+    /// Main function, delete ONLY selected photos
+    @Test func deletes_exactly_the_marked_photos() async {
+        let mock = MockPhotoLibraryService(photos: [
+            PhotoItem(id: "a", fileSize: 100),
+            PhotoItem(id: "b", fileSize: 200),
+            PhotoItem(id: "c", fileSize: 300),
+            PhotoItem(id: "d", fileSize: 400),
+        ])
+        let sut = await makeSUT(mock: mock)
+
+        sut.handleDecision(delete: true)
+        sut.handleDecision(delete: false)
+        sut.handleDecision(delete: true)
+
+        let ok = await sut.deleteMarkedPhotos()
+
+        #expect(ok == true)
+        let deleted = await mock.deletedIDs
+        #expect(deleted == ["a", "c"])
+    }
+
+    // Deshacer multinivel: marcas y bytes se mantienen sincronizados.
+    @Test func multilevel_undo_keeps_counts_in_sync() async {
+        let mock = MockPhotoLibraryService(photos: [
+            PhotoItem(id: "a", fileSize: 100),
+            PhotoItem(id: "b", fileSize: 200),
+            PhotoItem(id: "c", fileSize: 300),
+        ])
+        let sut = await makeSUT(mock: mock)
+
+        sut.handleDecision(delete: true)
+        sut.handleDecision(delete: true)
+        #expect(sut.toDeleteCount == 2)
+        #expect(sut.bytesToDelete == 300)
+
+        sut.undo()
+        #expect(sut.toDeleteCount == 1)
+        #expect(sut.bytesToDelete == 100)
+
+        sut.undo()
+        #expect(sut.toDeleteCount == 0)
+        #expect(sut.bytesToDelete == 0)
+        #expect(sut.canUndo == false)
+    }
+
+
+    @Test func undoing_a_keep_does_not_affect_delete_list() async {
+        let mock = MockPhotoLibraryService(photos: [
+            PhotoItem(id: "a", fileSize: 100),
+            PhotoItem(id: "b", fileSize: 200),
+        ])
+        let sut = await makeSUT(mock: mock)
+
+        sut.handleDecision(delete: false)  // conservar a
+        #expect(sut.currentIndex == 1)
+        #expect(sut.toDeleteCount == 0)
+
+        sut.undo()
+        #expect(sut.currentIndex == 0)
+        #expect(sut.toDeleteCount == 0)
+    }
+
+
+    @Test func empty_gallery_finishes_immediately() async {
+        let mock = MockPhotoLibraryService(photos: [])
+        let sut = await makeSUT(mock: mock)
+
+        #expect(sut.total == 0)
+        #expect(sut.isFinished == true)
+        #expect(sut.canUndo == false)
+    }
+
+
+    @Test func denied_access_sets_denied_state() async {
+        let sut = ReviewViewModel(library: MockPhotoLibraryService(access: .denied))
+        await sut.requestAccess()
+        #expect(sut.authState == .denied)
+    }
+
+
+    @Test func failed_deletion_keeps_marks() async {
+        let mock = MockPhotoLibraryService(
+            photos: [PhotoItem(id: "a", fileSize: 100)],
+            shouldFailDeletion: true
+        )
+        let sut = await makeSUT(mock: mock)
+
+        sut.handleDecision(delete: true)
+        let ok = await sut.deleteMarkedPhotos()
+
+        #expect(ok == false)
+        #expect(sut.toDeleteCount == 1)
+    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotoItem: Identifiable, Equatable {
+nonisolated struct PhotoItem: Identifiable, Equatable {
     let id: String
     let fileSize: Int64
 }
