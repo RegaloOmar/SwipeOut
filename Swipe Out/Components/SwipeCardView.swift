@@ -73,9 +73,12 @@ struct SwipeCardView: View {
                     flyAway(delete: delete)
                 }
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Photo. Use the Keep or Delete buttons below.")
     }
 
     private func flyAway(delete: Bool) {
+        Haptics.decision(delete: delete)
         let endX: CGFloat = delete ? 600 : -600
         withAnimation(.easeOut(duration: 0.25)) {
             offset = CGSize(width: endX, height: offset.height)

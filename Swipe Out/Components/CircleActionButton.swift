@@ -12,6 +12,7 @@ struct CircleActionButton: View {
     let icon: String
     let tint: Color
     var size: CGFloat = 64
+    let accessibilityLabel: String
     let action: () -> Void
 
     var body: some View {
@@ -25,5 +26,6 @@ struct CircleActionButton: View {
                 .shadow(color: .black.opacity(0.4), radius: 8, x: 0, y: 4)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityLabel)
     }
 }

@@ -100,6 +100,7 @@ struct ContentView: View {
 
             if viewModel.canUndo {
                 Button {
+                    Haptics.undo() 
                     withAnimation(.smooth(duration: 0.35)) {
                         viewModel.undo()
                     }
@@ -174,17 +175,18 @@ struct ContentView: View {
             }
 
             HStack(spacing: Theme.Spacing.xl) {
-                CircleActionButton(icon: "checkmark", tint: Theme.Colors.keep, size: 72) {
+                CircleActionButton(icon: "checkmark", tint: Theme.Colors.keep, size: 72, accessibilityLabel: "Keep photo") {
                     cardCommand = false
                 }
-                CircleActionButton(icon: "arrow.uturn.backward", tint: Theme.Colors.textSecondary, size: 52) {
+                CircleActionButton(icon: "arrow.uturn.backward", tint: Theme.Colors.textSecondary, size: 52, accessibilityLabel: "Undo last decision") {
+                    Haptics.undo()
                     withAnimation(.smooth(duration: 0.3)) {
                         viewModel.undo()
                     }
                 }
                 .disabled(!viewModel.canUndo)
                 .opacity(viewModel.canUndo ? 1 : 0.35)
-                CircleActionButton(icon: "trash.fill", tint: Theme.Colors.delete, size: 72) {
+                CircleActionButton(icon: "trash.fill", tint: Theme.Colors.delete, size: 72, accessibilityLabel: "Mark photo for deletion") {
                     cardCommand = true
                 }
             }
@@ -212,6 +214,7 @@ struct ContentView: View {
                 isDeleting = false
                 switch outcome {
                 case .success:
+                    Haptics.success()
                     resultText = "You freed \(freed)! 🎉"
                     showResult = true
                 case .failed:
@@ -251,6 +254,7 @@ struct ContentView: View {
         }
         .frame(height: 8)
         .animation(.easeInOut, value: fraction)
+        .accessibilityHidden(true) 
     }
 
     private func deckCard(scale: CGFloat, yOffset: CGFloat) -> some View {
@@ -262,6 +266,7 @@ struct ContentView: View {
             }
             .scaleEffect(scale)
             .offset(y: yOffset)
+            .accessibilityHidden(true)
     }
     
     private var limitedAccessBanner: some View {
