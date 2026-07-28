@@ -1,0 +1,599 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		E5CBB034300EB901001BD3F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5CBB01E300EB900001BD3F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5CBB025300EB900001BD3F7;
+			remoteInfo = "Swipe Out";
+		};
+		E5CBB03E300EB901001BD3F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5CBB01E300EB900001BD3F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5CBB025300EB900001BD3F7;
+			remoteInfo = "Swipe Out";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E5CBB026300EB900001BD3F7 /* Swipe Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swipe Out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5CBB033300EB901001BD3F7 /* Swipe OutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swipe OutTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5CBB03D300EB901001BD3F7 /* Swipe OutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swipe OutUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E5CBB028300EB900001BD3F7 /* Swipe Out */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Swipe Out";
+			sourceTree = "<group>";
+		};
+		E5CBB036300EB901001BD3F7 /* Swipe OutTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Swipe OutTests";
+			sourceTree = "<group>";
+		};
+		E5CBB040300EB901001BD3F7 /* Swipe OutUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Swipe OutUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E5CBB023300EB900001BD3F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5CBB030300EB901001BD3F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5CBB03A300EB901001BD3F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E5CBB01D300EB900001BD3F7 = {
+			isa = PBXGroup;
+			children = (
+				E5CBB028300EB900001BD3F7 /* Swipe Out */,
+				E5CBB036300EB901001BD3F7 /* Swipe OutTests */,
+				E5CBB040300EB901001BD3F7 /* Swipe OutUITests */,
+				E5CBB027300EB900001BD3F7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E5CBB027300EB900001BD3F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E5CBB026300EB900001BD3F7 /* Swipe Out.app */,
+				E5CBB033300EB901001BD3F7 /* Swipe OutTests.xctest */,
+				E5CBB03D300EB901001BD3F7 /* Swipe OutUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E5CBB025300EB900001BD3F7 /* Swipe Out */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5CBB047300EB901001BD3F7 /* Build configuration list for PBXNativeTarget "Swipe Out" */;
+			buildPhases = (
+				E5CBB022300EB900001BD3F7 /* Sources */,
+				E5CBB023300EB900001BD3F7 /* Frameworks */,
+				E5CBB024300EB900001BD3F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E5CBB028300EB900001BD3F7 /* Swipe Out */,
+			);
+			name = "Swipe Out";
+			packageProductDependencies = (
+			);
+			productName = "Swipe Out";
+			productReference = E5CBB026300EB900001BD3F7 /* Swipe Out.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E5CBB032300EB901001BD3F7 /* Swipe OutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5CBB04A300EB901001BD3F7 /* Build configuration list for PBXNativeTarget "Swipe OutTests" */;
+			buildPhases = (
+				E5CBB02F300EB901001BD3F7 /* Sources */,
+				E5CBB030300EB901001BD3F7 /* Frameworks */,
+				E5CBB031300EB901001BD3F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5CBB035300EB901001BD3F7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E5CBB036300EB901001BD3F7 /* Swipe OutTests */,
+			);
+			name = "Swipe OutTests";
+			packageProductDependencies = (
+			);
+			productName = "Swipe OutTests";
+			productReference = E5CBB033300EB901001BD3F7 /* Swipe OutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E5CBB03C300EB901001BD3F7 /* Swipe OutUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5CBB04D300EB901001BD3F7 /* Build configuration list for PBXNativeTarget "Swipe OutUITests" */;
+			buildPhases = (
+				E5CBB039300EB901001BD3F7 /* Sources */,
+				E5CBB03A300EB901001BD3F7 /* Frameworks */,
+				E5CBB03B300EB901001BD3F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5CBB03F300EB901001BD3F7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E5CBB040300EB901001BD3F7 /* Swipe OutUITests */,
+			);
+			name = "Swipe OutUITests";
+			packageProductDependencies = (
+			);
+			productName = "Swipe OutUITests";
+			productReference = E5CBB03D300EB901001BD3F7 /* Swipe OutUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E5CBB01E300EB900001BD3F7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					E5CBB025300EB900001BD3F7 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					E5CBB032300EB901001BD3F7 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = E5CBB025300EB900001BD3F7;
+					};
+					E5CBB03C300EB901001BD3F7 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = E5CBB025300EB900001BD3F7;
+					};
+				};
+			};
+			buildConfigurationList = E5CBB021300EB900001BD3F7 /* Build configuration list for PBXProject "Swipe Out" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E5CBB01D300EB900001BD3F7;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E5CBB027300EB900001BD3F7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E5CBB025300EB900001BD3F7 /* Swipe Out */,
+				E5CBB032300EB901001BD3F7 /* Swipe OutTests */,
+				E5CBB03C300EB901001BD3F7 /* Swipe OutUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E5CBB024300EB900001BD3F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5CBB031300EB901001BD3F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5CBB03B300EB901001BD3F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E5CBB022300EB900001BD3F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5CBB02F300EB901001BD3F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5CBB039300EB901001BD3F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E5CBB035300EB901001BD3F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5CBB025300EB900001BD3F7 /* Swipe Out */;
+			targetProxy = E5CBB034300EB901001BD3F7 /* PBXContainerItemProxy */;
+		};
+		E5CBB03F300EB901001BD3F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5CBB025300EB900001BD3F7 /* Swipe Out */;
+			targetProxy = E5CBB03E300EB901001BD3F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E5CBB045300EB901001BD3F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E5CBB046300EB901001BD3F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E5CBB048300EB901001BD3F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Swipe-Out-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Swipe Out";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Swipe Out needs access to your photo library so you can check and delete the images you dont want.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Swipe Out needs access to your photo library so you can check and delete the images you dont want.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.regy.Swipe-Out";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E5CBB049300EB901001BD3F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Swipe-Out-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Swipe Out";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Swipe Out needs access to your photo library so you can check and delete the images you dont want.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Swipe Out needs access to your photo library so you can check and delete the images you dont want.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.regy.Swipe-Out";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		E5CBB04B300EB901001BD3F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.regy.Swipe-OutTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swipe Out.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Swipe Out";
+			};
+			name = Debug;
+		};
+		E5CBB04C300EB901001BD3F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.regy.Swipe-OutTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swipe Out.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Swipe Out";
+			};
+			name = Release;
+		};
+		E5CBB04E300EB901001BD3F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.regy.Swipe-OutUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Swipe Out";
+			};
+			name = Debug;
+		};
+		E5CBB04F300EB901001BD3F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A8498PHTR;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.regy.Swipe-OutUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Swipe Out";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E5CBB021300EB900001BD3F7 /* Build configuration list for PBXProject "Swipe Out" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5CBB045300EB901001BD3F7 /* Debug */,
+				E5CBB046300EB901001BD3F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5CBB047300EB901001BD3F7 /* Build configuration list for PBXNativeTarget "Swipe Out" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5CBB048300EB901001BD3F7 /* Debug */,
+				E5CBB049300EB901001BD3F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5CBB04A300EB901001BD3F7 /* Build configuration list for PBXNativeTarget "Swipe OutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5CBB04B300EB901001BD3F7 /* Debug */,
+				E5CBB04C300EB901001BD3F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5CBB04D300EB901001BD3F7 /* Build configuration list for PBXNativeTarget "Swipe OutUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5CBB04E300EB901001BD3F7 /* Debug */,
+				E5CBB04F300EB901001BD3F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E5CBB01E300EB900001BD3F7 /* Project object */;
+}
