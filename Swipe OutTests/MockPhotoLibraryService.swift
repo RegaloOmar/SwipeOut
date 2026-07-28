@@ -15,7 +15,7 @@ actor MockPhotoLibraryService: PhotoLibraryService {
     var deletionError: PhotoLibraryError?
     private(set) var deletedIDs: [String] = []
 
-    init(access: PhotoAccess = .granted, photos: [PhotoItem] = [], deletionError: PhotoLibraryError? = nil) {
+    init(access: PhotoAccess = .full, photos: [PhotoItem] = [], deletionError: PhotoLibraryError? = nil) {
             self.access = access
             self.photos = photos
             self.deletionError = deletionError
@@ -26,6 +26,8 @@ actor MockPhotoLibraryService: PhotoLibraryService {
     func fetchPhotos() async -> [PhotoItem] { photos }
 
     func loadImage(id: String, targetSize: CGSize) async -> UIImage? { nil }
+    
+    func presentLimitedPicker() async { }
 
     func deletePhotos(ids: [String]) async throws {
         if let deletionError { throw deletionError }

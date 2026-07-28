@@ -125,6 +125,10 @@ struct ContentView: View {
     private var reviewView: some View {
         VStack(spacing: 20) {
             VStack(spacing: Theme.Spacing.sm) {
+                
+                if viewModel.isLimitedAccess {
+                    limitedAccessBanner
+                }
                 progressBar(
                     fraction: viewModel.total == 0 ? 0
                         : CGFloat(viewModel.currentIndex) / CGFloat(viewModel.total)
@@ -258,6 +262,24 @@ struct ContentView: View {
             }
             .scaleEffect(scale)
             .offset(y: yOffset)
+    }
+    
+    private var limitedAccessBanner: some View {
+        HStack(spacing: Theme.Spacing.sm) {
+            Image(systemName: "exclamationmark.circle.fill")
+            Text("You're only reviewing your selected photos.")
+            Spacer(minLength: Theme.Spacing.sm)
+            Button("Add more") {
+                Task {
+                    await viewModel.expandLimitedSelection()
+                }
+            }
+            .foregroundStyle(Theme.Colors.accent)
+        }
+        .font(Theme.Typography.caption)
+        .foregroundStyle(Theme.Colors.textSecondary)
+        .padding(Theme.Spacing.sm)
+        .background(Theme.Colors.surface, in: RoundedRectangle(cornerRadius: Theme.Radius.button))
     }
 
     private func openSettings() {

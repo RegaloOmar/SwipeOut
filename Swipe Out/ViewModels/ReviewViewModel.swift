@@ -23,6 +23,7 @@ final class ReviewViewModel {
     private var items: [PhotoItem] = []
     var currentIndex = 0
     var currentImage: UIImage?
+    var isLimitedAccess = false
 
     var total: Int { items.count }
     var isFinished: Bool { currentIndex >= items.count }
@@ -45,8 +46,13 @@ final class ReviewViewModel {
     // MARK: - Funcitons
     func requestAccess() async {
         switch await library.requestAuthorization() {
-        case .granted:
-            await loadPhotos()        // cargamos ANTES de mostrar "autorizado"
+        case .full:
+            isLimitedAccess = false
+            await loadPhotos()
+            authState = .authorized
+        case .limited:
+            isLimitedAccess = true
+            await loadPhotos()
             authState = .authorized
         case .denied:
             authState = .denied
@@ -139,5 +145,10 @@ final class ReviewViewModel {
         bytesToDelete = 0
         imageLoader.keepOnly([])
         Task { await loadPhotos() }
+    }
+    
+    func expandLimitedSelection() async {
+        await library.presentLimitedPicker()
+        await loadPhotos()
     }
 }

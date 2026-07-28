@@ -8,10 +8,10 @@
 import UIKit
 
 enum PhotoAccess {
-    case granted
+    case full
+    case limited
     case denied
 }
-
 
 enum PhotoLibraryError: Error {
     case cancelled
@@ -23,4 +23,5 @@ protocol PhotoLibraryService: Sendable {
     func fetchPhotos() async -> [PhotoItem]
     func loadImage(id: String, targetSize: CGSize) async -> UIImage?
     func deletePhotos(ids: [String]) async throws
+    func presentLimitedPicker() async
 }

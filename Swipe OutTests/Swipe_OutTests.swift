@@ -124,4 +124,12 @@ struct ReviewViewModelTests {
         #expect(outcome == .cancelled)
         #expect(sut.toDeleteCount == 1)
     }
+    
+    @Test func limited_access_is_authorized_and_flagged() async {
+        let mock = MockPhotoLibraryService(access: .limited,
+                                           photos: [PhotoItem(id: "a", fileSize: 1)])
+        let sut = await makeSUT(mock: mock)
+        #expect(sut.authState == .authorized)
+        #expect(sut.isLimitedAccess == true)
+    }
 }
