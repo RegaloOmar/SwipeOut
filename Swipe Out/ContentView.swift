@@ -10,7 +10,8 @@ import UIKit
 
 struct ContentView: View {
 
-    @State private var photoManager = PhotoManager()
+    
+    @State private var viewModel = ReviewViewModel(library: PhotoKitLibraryService())
     @State private var isDeleting = false
     @State private var showResult = false
     @State private var resultText = ""
@@ -18,11 +19,11 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            switch photoManager.authState {
+            switch viewModel.authState {
             case .unknown:
                     loadingView
             case .authorized:
-                    if photoManager.isFinished {
+                    if viewModel.isFinished {
                         finishedView
                             .transition(.opacity.combined(with: .scale(scale: 0.96)))
                     } else {
@@ -46,7 +47,7 @@ struct ContentView: View {
         .background(Theme.Colors.background.ignoresSafeArea())
         .preferredColorScheme(.dark)
         .task {
-            await photoManager.requestAccess()
+            await viewModel.requestAccess()
         }
         .alert(resultText, isPresented: $showResult) {
             Button("OK", role: .cancel) { }
@@ -76,14 +77,14 @@ struct ContentView: View {
                message: "You've gone through every photo in your gallery. Nice work!"
            )
 
-            if photoManager.toDeleteCount > 0 {
+            if viewModel.toDeleteCount > 0 {
                 deleteButton
             }
             
-            if photoManager.toDeleteCount == 0 {
+            if viewModel.toDeleteCount == 0 {
                 Button {
                     withAnimation(.smooth(duration: 0.35)) {
-                        photoManager.restart()
+                        viewModel.restart()
                     }
                 } label: {
                     Label("Start over", systemImage: "arrow.clockwise")
@@ -97,10 +98,10 @@ struct ContentView: View {
                 .buttonStyle(.plain)
             }
 
-            if photoManager.canUndo {
+            if viewModel.canUndo {
                 Button {
                     withAnimation(.smooth(duration: 0.35)) {
-                        photoManager.undo()
+                        viewModel.undo()
                     }
                 } label: {
                     Label("Go back to last photo", systemImage: "arrow.uturn.backward")
@@ -125,15 +126,15 @@ struct ContentView: View {
         VStack(spacing: 20) {
             VStack(spacing: Theme.Spacing.sm) {
                 progressBar(
-                    fraction: photoManager.total == 0 ? 0
-                        : CGFloat(photoManager.currentIndex) / CGFloat(photoManager.total)
+                    fraction: viewModel.total == 0 ? 0
+                        : CGFloat(viewModel.currentIndex) / CGFloat(viewModel.total)
                 )
                 HStack {
                     HStack {
-                        Text("\(photoManager.currentIndex) of \(photoManager.total)")
+                        Text("\(viewModel.currentIndex) of \(viewModel.total)")
                         Spacer()
-                        if photoManager.toDeleteCount > 0 {
-                            Text("≈ \(photoManager.freedSpaceText) to free")
+                        if viewModel.toDeleteCount > 0 {
+                            Text("≈ \(viewModel.freedSpaceText) to free")
                                 .foregroundStyle(Theme.Colors.delete)
                         }
                     }
@@ -141,24 +142,24 @@ struct ContentView: View {
                 .font(Theme.Typography.caption)
                 .foregroundStyle(Theme.Colors.textSecondary)
             }
-            if let image = photoManager.currentImage {
+            if let image = viewModel.currentImage {
                 GeometryReader { geo in
                     let cardW = geo.size.width - Theme.Spacing.lg * 2
                     let cardH = min(cardW * 4.0 / 3.0, geo.size.height)
 
                     ZStack {
-                        if photoManager.total - photoManager.currentIndex > 2 {
+                        if viewModel.total - viewModel.currentIndex > 2 {
                             deckCard(scale: 0.90, yOffset: 52)
                         }
-                        if photoManager.total - photoManager.currentIndex > 1 {
+                        if viewModel.total - viewModel.currentIndex > 1 {
                             deckCard(scale: 0.95, yOffset: 26)
                         }
                         SwipeCardView(image: image, command: $cardCommand) { delete in
                             withAnimation(.smooth(duration: 0.3)) {
-                                photoManager.handleDecision(delete: delete)
+                                viewModel.handleDecision(delete: delete)
                             }
                         }
-                        .id(photoManager.currentIndex)
+                        .id(viewModel.currentIndex)
                     }
                     .frame(width: cardW, height: cardH)
                     .frame(width: geo.size.width, height: geo.size.height)
@@ -174,18 +175,18 @@ struct ContentView: View {
                 }
                 CircleActionButton(icon: "arrow.uturn.backward", tint: Theme.Colors.textSecondary, size: 52) {
                     withAnimation(.smooth(duration: 0.3)) {
-                        photoManager.undo()
+                        viewModel.undo()
                     }
                 }
-                .disabled(!photoManager.canUndo)
-                .opacity(photoManager.canUndo ? 1 : 0.35)
+                .disabled(!viewModel.canUndo)
+                .opacity(viewModel.canUndo ? 1 : 0.35)
                 CircleActionButton(icon: "trash.fill", tint: Theme.Colors.delete, size: 72) {
                     cardCommand = true
                 }
             }
 
             ZStack {
-                if photoManager.toDeleteCount > 0 {
+                if viewModel.toDeleteCount > 0 {
                     deleteButton
                         .transition(.asymmetric(
                             insertion: .opacity.combined(with: .scale(scale: 0.96)),
@@ -202,8 +203,8 @@ struct ContentView: View {
         Button {
             Task {
                 isDeleting = true
-                let freed = photoManager.freedSpaceText
-                let ok = await photoManager.deleteMarkedPhotos()
+                let freed = viewModel.freedSpaceText
+                let ok = await viewModel.deleteMarkedPhotos()
                 isDeleting = false
                 resultText = ok ? "You freed \(freed)! 🎉" : "Delete operation was cancelled"
                 showResult = true
@@ -214,7 +215,7 @@ struct ContentView: View {
                     ProgressView().tint(.white)
                 } else {
                     Image(systemName: "trash.fill")
-                    Text("Delete \(photoManager.toDeleteCount) Photo\(photoManager.toDeleteCount == 1 ? "" : "s")")
+                    Text("Delete \(viewModel.toDeleteCount) Photo\(viewModel.toDeleteCount == 1 ? "" : "s")")
                 }
             }
             .font(Theme.Typography.headline)
