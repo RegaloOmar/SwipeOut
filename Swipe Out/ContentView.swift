@@ -204,10 +204,18 @@ struct ContentView: View {
             Task {
                 isDeleting = true
                 let freed = viewModel.freedSpaceText
-                let ok = await viewModel.deleteMarkedPhotos()
+                let outcome = await viewModel.deleteMarkedPhotos()
                 isDeleting = false
-                resultText = ok ? "You freed \(freed)! 🎉" : "Delete operation was cancelled"
-                showResult = true
+                switch outcome {
+                case .success:
+                    resultText = "You freed \(freed)! 🎉"
+                    showResult = true
+                case .failed:
+                    resultText = "Something went wrong. Your photos are safe, please try again."
+                    showResult = true
+                case .cancelled:
+                    break
+                }
             }
         } label: {
             HStack(spacing: Theme.Spacing.sm) {

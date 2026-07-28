@@ -78,7 +78,10 @@ actor PhotoKitLibraryService: PhotoLibraryService {
                 PHAssetChangeRequest.deleteAssets(assets)
             }
         } catch {
-            throw PhotoLibraryError.deletionFailed
+            if let phError = error as? PHPhotosError, phError.code == .userCancelled {
+                throw PhotoLibraryError.cancelled
+            }
+            throw PhotoLibraryError.failed
         }
     }
 

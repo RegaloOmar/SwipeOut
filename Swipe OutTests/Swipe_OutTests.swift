@@ -35,14 +35,12 @@ struct ReviewViewModelTests {
         sut.handleDecision(delete: false)
         sut.handleDecision(delete: true)
 
-        let ok = await sut.deleteMarkedPhotos()
-
-        #expect(ok == true)
+        let outcome = await sut.deleteMarkedPhotos()
+        #expect(outcome == .success)
         let deleted = await mock.deletedIDs
         #expect(deleted == ["a", "c"])
     }
 
-    // Deshacer multinivel: marcas y bytes se mantienen sincronizados.
     @Test func multilevel_undo_keeps_counts_in_sync() async {
         let mock = MockPhotoLibraryService(photos: [
             PhotoItem(id: "a", fileSize: 100),
@@ -74,7 +72,7 @@ struct ReviewViewModelTests {
         ])
         let sut = await makeSUT(mock: mock)
 
-        sut.handleDecision(delete: false)  // conservar a
+        sut.handleDecision(delete: false)
         #expect(sut.currentIndex == 1)
         #expect(sut.toDeleteCount == 0)
 
@@ -104,14 +102,26 @@ struct ReviewViewModelTests {
     @Test func failed_deletion_keeps_marks() async {
         let mock = MockPhotoLibraryService(
             photos: [PhotoItem(id: "a", fileSize: 100)],
-            shouldFailDeletion: true
+            deletionError: .failed
         )
         let sut = await makeSUT(mock: mock)
-
         sut.handleDecision(delete: true)
-        let ok = await sut.deleteMarkedPhotos()
 
-        #expect(ok == false)
+        let outcome = await sut.deleteMarkedPhotos()
+        #expect(outcome == .failed)
+        #expect(sut.toDeleteCount == 1)
+    }
+    
+    @Test func cancelled_deletion_keeps_marks() async {
+        let mock = MockPhotoLibraryService(
+            photos: [PhotoItem(id: "a", fileSize: 100)],
+            deletionError: .cancelled
+        )
+        let sut = await makeSUT(mock: mock)
+        sut.handleDecision(delete: true)
+
+        let outcome = await sut.deleteMarkedPhotos()
+        #expect(outcome == .cancelled)
         #expect(sut.toDeleteCount == 1)
     }
 }

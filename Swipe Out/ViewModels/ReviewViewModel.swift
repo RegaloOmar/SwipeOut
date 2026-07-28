@@ -12,6 +12,7 @@ import SwiftUI
 final class ReviewViewModel {
 
     enum AuthState { case unknown, authorized, denied }
+    enum DeletionOutcome { case success, cancelled, failed }
 
     // MARK: - Dependencies
     private let library: PhotoLibraryService
@@ -117,19 +118,20 @@ final class ReviewViewModel {
         imageLoader.keepOnly(keep)
     }
 
-    func deleteMarkedPhotos() async -> Bool {
-        guard !toDelete.isEmpty else { return true }
-        let ids = toDelete.map(\.id)
-        do {
-            try await library.deletePhotos(ids: ids)
-            toDelete.removeAll()
-            decisionHistory.removeAll()
-            bytesToDelete = 0
-            return true
-        } catch {
-            return false
+    func deleteMarkedPhotos() async -> DeletionOutcome {
+            guard !toDelete.isEmpty else { return .success }
+            do {
+                try await library.deletePhotos(ids: toDelete.map(\.id))
+                toDelete.removeAll()
+                decisionHistory.removeAll()
+                bytesToDelete = 0
+                return .success
+            } catch PhotoLibraryError.cancelled {
+                return .cancelled
+            } catch {
+                return .failed
+            }
         }
-    }
 
     func restart() {
         toDelete.removeAll()

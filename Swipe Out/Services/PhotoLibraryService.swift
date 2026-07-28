@@ -14,7 +14,8 @@ enum PhotoAccess {
 
 
 enum PhotoLibraryError: Error {
-    case deletionFailed
+    case cancelled
+    case failed
 }
 
 protocol PhotoLibraryService: Sendable {
