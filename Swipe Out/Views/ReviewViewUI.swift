@@ -46,9 +46,7 @@ struct ReviewView: View {
                             deckCard(scale: 0.95, yOffset: 26)
                         }
                         SwipeCardView(image: image, command: $cardCommand) { delete in
-                            withAnimation(.smooth(duration: 0.3)) {
-                                viewModel.handleDecision(delete: delete)
-                            }
+                            Task { await viewModel.handleDecision(delete: delete) }
                         }
                         .id(viewModel.currentIndex)
                     }

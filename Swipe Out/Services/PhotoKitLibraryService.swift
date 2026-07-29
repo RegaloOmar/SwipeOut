@@ -49,10 +49,17 @@ actor PhotoKitLibraryService: PhotoLibraryService {
         result.enumerateObjects { asset, _, _ in
             let id = asset.localIdentifier
             map[id] = asset
-            items.append(PhotoItem(id: id, fileSize: Self.fileSize(of: asset)))
+            items.append(PhotoItem(id: id))       // sin tamaño: carga rápida a cualquier escala
         }
         assetsByID = map
         return items
+    }
+
+    // MARK: - File Size (bajo demanda, solo para lo que se marca)
+
+    func fileSize(for id: String) async -> Int64 {
+        guard let asset = assetsByID[id] else { return 0 }
+        return Self.fileSize(of: asset)
     }
 
     // MARK: - Load Image

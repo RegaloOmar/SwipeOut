@@ -21,6 +21,7 @@ enum PhotoLibraryError: Error {
 protocol PhotoLibraryService: Sendable {
     func requestAuthorization() async -> PhotoAccess
     func fetchPhotos() async -> [PhotoItem]
+    func fileSize(for id: String) async -> Int64
     func loadImage(id: String, targetSize: CGSize) async -> UIImage?
     func deletePhotos(ids: [String]) async throws
     func presentLimitedPicker() async

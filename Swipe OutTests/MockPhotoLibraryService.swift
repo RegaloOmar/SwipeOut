@@ -9,24 +9,31 @@ import UIKit
 @testable import Swipe_Out
 
 actor MockPhotoLibraryService: PhotoLibraryService {
-    
+
     var access: PhotoAccess
     var photos: [PhotoItem]
+    var sizes: [String: Int64]
     var deletionError: PhotoLibraryError?
     private(set) var deletedIDs: [String] = []
 
-    init(access: PhotoAccess = .full, photos: [PhotoItem] = [], deletionError: PhotoLibraryError? = nil) {
-            self.access = access
-            self.photos = photos
-            self.deletionError = deletionError
-        }
+    init(access: PhotoAccess = .full,
+         photos: [PhotoItem] = [],
+         sizes: [String: Int64] = [:],
+         deletionError: PhotoLibraryError? = nil) {
+        self.access = access
+        self.photos = photos
+        self.sizes = sizes
+        self.deletionError = deletionError
+    }
 
     func requestAuthorization() async -> PhotoAccess { access }
 
     func fetchPhotos() async -> [PhotoItem] { photos }
 
+    func fileSize(for id: String) async -> Int64 { sizes[id] ?? 0 }
+
     func loadImage(id: String, targetSize: CGSize) async -> UIImage? { nil }
-    
+
     func presentLimitedPicker() async { }
 
     func deletePhotos(ids: [String]) async throws {

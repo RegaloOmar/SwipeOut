@@ -34,7 +34,13 @@ final class ReviewViewModel {
     var toDeleteCount: Int { toDelete.count }
     var canUndo: Bool { !decisionHistory.isEmpty }
 
-    private(set) var bytesToDelete: Int64 = 0
+    /// Tamaños ya consultados, por id. Se llena bajo demanda al marcar.
+    private var sizeByID: [String: Int64] = [:]
+
+    /// Suma de tamaños de las fotos actualmente marcadas. Calculada → nunca se desincroniza.
+    var bytesToDelete: Int64 {
+        toDelete.reduce(0) { $0 + (sizeByID[$1.id] ?? 0) }
+    }
     var freedSpaceText: String { bytesToDelete.formatted(.byteCount(style: .file)) }
 
 
@@ -66,24 +72,29 @@ final class ReviewViewModel {
     }
 
     // MARK: - Decisions
-    func handleDecision(delete: Bool) {
+    func handleDecision(delete: Bool) async {
         guard currentIndex < items.count else { return }
         let item = items[currentIndex]
-        if delete {
-            toDelete.append(item)
-            bytesToDelete += item.fileSize
+
+        // Avanzamos de inmediato (UI ágil) dentro de la animación.
+        withAnimation(.smooth(duration: 0.3)) {
+            if delete { toDelete.append(item) }
+            decisionHistory.append(delete)
+            currentIndex += 1
         }
-        decisionHistory.append(delete)
-        currentIndex += 1
         showCurrentImage()
+
+        // Solo si se marcó para borrar, pedimos su tamaño (una consulta, no 10.000).
+        if delete, sizeByID[item.id] == nil {
+            sizeByID[item.id] = await library.fileSize(for: item.id)
+        }
     }
 
     func undo() {
         guard let wasDelete = decisionHistory.popLast() else { return }
         currentIndex -= 1
         if wasDelete {
-            toDelete.removeLast()
-            bytesToDelete = max(0, bytesToDelete - items[currentIndex].fileSize)
+            toDelete.removeLast()      // bytesToDelete se recalcula solo (excluye lo quitado)
         }
         showCurrentImage()
     }
@@ -130,7 +141,7 @@ final class ReviewViewModel {
                 try await library.deletePhotos(ids: toDelete.map(\.id))
                 toDelete.removeAll()
                 decisionHistory.removeAll()
-                bytesToDelete = 0
+                sizeByID.removeAll()
                 return .success
             } catch PhotoLibraryError.cancelled {
                 return .cancelled
@@ -142,7 +153,7 @@ final class ReviewViewModel {
     func restart() {
         toDelete.removeAll()
         decisionHistory.removeAll()
-        bytesToDelete = 0
+        sizeByID.removeAll()
         imageLoader.keepOnly([])
         Task { await loadPhotos() }
     }

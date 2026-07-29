@@ -9,5 +9,4 @@ import Foundation
 
 nonisolated struct PhotoItem: Identifiable, Equatable {
     let id: String
-    let fileSize: Int64
 }
