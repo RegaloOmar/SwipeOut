@@ -38,6 +38,7 @@
       }
     },
     "Delete %lld Photo%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -52,6 +53,9 @@
           }
         }
       }
+    },
+    "Delete %lld Photos" : {
+
     },
     "Getting your photos ready…" : {
       "localizations" : {
@@ -103,6 +107,9 @@
         }
       }
     },
+    "Something went wrong. Your photos are safe — please try again." : {
+
+    },
     "Start over" : {
       "localizations" : {
         "es-419" : {
@@ -112,6 +119,9 @@
           }
         }
       }
+    },
+    "You freed %@! 🎉" : {
+
     },
     "You're only reviewing your selected photos." : {
       "localizations" : {
