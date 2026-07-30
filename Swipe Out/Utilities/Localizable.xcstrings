@@ -55,7 +55,14 @@
       }
     },
     "Delete %lld Photos" : {
-
+      "localizations" : {
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar %1$lld Fotos"
+          }
+        }
+      }
     },
     "Getting your photos ready…" : {
       "localizations" : {
@@ -108,20 +115,44 @@
       }
     },
     "Something went wrong. Your photos are safe — please try again." : {
-
+      "localizations" : {
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo salió mal, tus fotos están seguras, por favor intenta de nuevo."
+          }
+        }
+      }
     },
     "Start over" : {
       "localizations" : {
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empezar de nuevo."
+            "value" : "Empieza de nuevo."
+          }
+        }
+      }
+    },
+    "Swipe Out" : {
+      "localizations" : {
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swipe Out"
           }
         }
       }
     },
     "You freed %@! 🎉" : {
-
+      "localizations" : {
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz liberado%@! 🎉"
+          }
+        }
+      }
     },
     "You're only reviewing your selected photos." : {
       "localizations" : {

@@ -11,6 +11,7 @@ import UIKit
 struct ContentView: View {
 
     @State private var viewModel = ReviewViewModel(library: PhotoKitLibraryService())
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         VStack(spacing: 20) {
@@ -43,6 +44,31 @@ struct ContentView: View {
         .preferredColorScheme(.dark)
         .task {
             await viewModel.requestAccess()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task { await viewModel.refreshOnForeground() }
+            }
+        }
+        // Cortina de privacidad: oculta las fotos en el app switcher.
+        .overlay {
+            if scenePhase != .active {
+                privacyCurtain
+            }
+        }
+    }
+
+    private var privacyCurtain: some View {
+        ZStack {
+            Theme.Colors.background.ignoresSafeArea()
+            VStack(spacing: Theme.Spacing.md) {
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 56, weight: .semibold))
+                    .foregroundStyle(Theme.Colors.accent)
+                Text("Swipe Out")
+                    .font(Theme.Typography.title)
+                    .foregroundStyle(Theme.Colors.textPrimary)
+            }
         }
     }
 

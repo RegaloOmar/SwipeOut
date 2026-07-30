@@ -71,6 +71,17 @@ final class ReviewViewModel {
         showCurrentImage()
     }
 
+    /// Function to know if is safe to refetch the photos
+    /// runs after the app comes to being active again
+    func refreshOnForeground() async {
+        guard authState == .authorized, toDelete.isEmpty else { return }
+        let fresh = await library.fetchPhotos()
+        guard fresh.map(\.id) != items.map(\.id) else { return }   // nada cambió
+        items = fresh
+        currentIndex = 0
+        showCurrentImage()
+    }
+
     // MARK: - Decisions
     func handleDecision(delete: Bool) async {
         guard currentIndex < items.count else { return }
