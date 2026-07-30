@@ -108,11 +108,11 @@ final class ReviewViewModel {
         let id = items[index].id
 
         if let cached = imageLoader.cachedImage(for: id) {
-            currentImage = cached                       // ya en caché → instantáneo
+            currentImage = cached
         } else {
             Task {
                 let image = await imageLoader.image(for: id)
-                guard currentIndex == index else { return }   // descarta respuestas viejas
+                guard currentIndex == index else { return }
                 currentImage = image
             }
         }

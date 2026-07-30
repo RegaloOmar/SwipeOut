@@ -49,13 +49,13 @@ actor PhotoKitLibraryService: PhotoLibraryService {
         result.enumerateObjects { asset, _, _ in
             let id = asset.localIdentifier
             map[id] = asset
-            items.append(PhotoItem(id: id))       // sin tamaño: carga rápida a cualquier escala
+            items.append(PhotoItem(id: id))
         }
         assetsByID = map
         return items
     }
 
-    // MARK: - File Size (bajo demanda, solo para lo que se marca)
+    // MARK: - File Size
 
     func fileSize(for id: String) async -> Int64 {
         guard let asset = assetsByID[id] else { return 0 }
@@ -114,7 +114,7 @@ actor PhotoKitLibraryService: PhotoLibraryService {
         return 0
     }
     
-    /// Muestra el selector nativo de "fotos seleccionadas" y espera a que se cierre.
+
     func presentLimitedPicker() async {
         await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
             Task { @MainActor in
@@ -129,7 +129,6 @@ actor PhotoKitLibraryService: PhotoLibraryService {
         }
     }
 
-    /// Encuentra el view controller visible para presentar desde SwiftUI.
     @MainActor
     private static func topViewController() -> UIViewController? {
         let scene = UIApplication.shared.connectedScenes
