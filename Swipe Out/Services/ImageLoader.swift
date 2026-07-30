@@ -11,7 +11,7 @@ import UIKit
 final class ImageLoader {
     private let library: PhotoLibraryService
     private var cache: [String: UIImage] = [:]
-    private let targetSize = CGSize(width: 1000, height: 1000)
+    private let targetSize = CGSize(width: 1320, height: 1760)
 
     init(library: PhotoLibraryService) {
         self.library = library
