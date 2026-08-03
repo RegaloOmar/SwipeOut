@@ -11,6 +11,7 @@ import UIKit
 final class ImageLoader {
     private let library: PhotoLibraryService
     private var cache: [String: UIImage] = [:]
+    private var inFlight: [String: Task<UIImage?, Never>] = [:]
     private let targetSize = CGSize(width: 1320, height: 1760)
 
     init(library: PhotoLibraryService) {
@@ -23,7 +24,15 @@ final class ImageLoader {
 
     func image(for id: String) async -> UIImage? {
         if let cached = cache[id] { return cached }
-        let image = await library.loadImage(id: id, targetSize: targetSize)
+        if let existing = inFlight[id] { return await existing.value }
+
+        let task = Task { [library, targetSize] in
+            await library.loadImage(id: id, targetSize: targetSize)
+        }
+        inFlight[id] = task
+        let image = await task.value
+        inFlight[id] = nil
+
         if let image { cache[id] = image }
         return image
     }

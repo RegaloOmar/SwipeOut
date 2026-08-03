@@ -8,7 +8,19 @@
 import Photos
 import UIKit
 import PhotosUI
+import Foundation
 
+
+private nonisolated final class ResumeGuard: @unchecked Sendable {
+    private var claimed = false
+    private let lock = NSLock()
+    func claim() -> Bool {
+        lock.lock(); defer { lock.unlock() }
+        guard !claimed else { return false }
+        claimed = true
+        return true
+    }
+}
 
 actor PhotoKitLibraryService: PhotoLibraryService {
 
@@ -72,6 +84,7 @@ actor PhotoKitLibraryService: PhotoLibraryService {
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = true
 
+        let resumeGuard = ResumeGuard()
         return await withCheckedContinuation { continuation in
             imageManager.requestImage(
                 for: asset,
@@ -79,6 +92,7 @@ actor PhotoKitLibraryService: PhotoLibraryService {
                 contentMode: .aspectFit,
                 options: options
             ) { @Sendable image, _ in
+                guard resumeGuard.claim() else { return }
                 continuation.resume(returning: image)
             }
         }

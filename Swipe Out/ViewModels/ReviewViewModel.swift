@@ -33,11 +33,9 @@ final class ReviewViewModel {
     private var decisionHistory: [Bool] = []
     var toDeleteCount: Int { toDelete.count }
     var canUndo: Bool { !decisionHistory.isEmpty }
-
-    /// Tamaños ya consultados, por id. Se llena bajo demanda al marcar.
     private var sizeByID: [String: Int64] = [:]
+    private var loadTask: Task<Void, Never>?
 
-    /// Suma de tamaños de las fotos actualmente marcadas. Calculada → nunca se desincroniza.
     var bytesToDelete: Int64 {
         toDelete.reduce(0) { $0 + (sizeByID[$1.id] ?? 0) }
     }
@@ -87,7 +85,6 @@ final class ReviewViewModel {
         guard currentIndex < items.count else { return }
         let item = items[currentIndex]
 
-        // Avanzamos de inmediato (UI ágil) dentro de la animación.
         withAnimation(.smooth(duration: 0.3)) {
             if delete { toDelete.append(item) }
             decisionHistory.append(delete)
@@ -95,7 +92,6 @@ final class ReviewViewModel {
         }
         showCurrentImage()
 
-        // Solo si se marcó para borrar, pedimos su tamaño (una consulta, no 10.000).
         if delete, sizeByID[item.id] == nil {
             sizeByID[item.id] = await library.fileSize(for: item.id)
         }
@@ -105,12 +101,16 @@ final class ReviewViewModel {
         guard let wasDelete = decisionHistory.popLast() else { return }
         currentIndex -= 1
         if wasDelete {
-            toDelete.removeLast()      // bytesToDelete se recalcula solo (excluye lo quitado)
+            toDelete.removeLast()
         }
         showCurrentImage()
     }
 
     private func showCurrentImage() {
+
+        loadTask?.cancel()
+        loadTask = nil
+
         guard currentIndex < items.count else {
             currentImage = nil
             return
@@ -121,9 +121,11 @@ final class ReviewViewModel {
         if let cached = imageLoader.cachedImage(for: id) {
             currentImage = cached
         } else {
-            Task {
+        
+            currentImage = nil
+            loadTask = Task {
                 let image = await imageLoader.image(for: id)
-                guard currentIndex == index else { return }
+                guard !Task.isCancelled, currentIndex == index else { return }
                 currentImage = image
             }
         }
