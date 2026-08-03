@@ -14,13 +14,17 @@ struct SwipeCardView: View {
     let onDecision: (_ delete: Bool) -> Void
 
     @State private var offset: CGSize = .zero
-    private let threshold: CGFloat = 180
+    @State private var committedDelete: Bool? = nil
+    private let threshold: CGFloat = 130
+    private let deadzone: CGFloat = 10
 
-    private var isDeleting: Bool { offset.width > 0 }
+    private var isDeleting: Bool { committedDelete ?? (offset.width > 0) }
+    private var showsFeedback: Bool { abs(offset.width) > deadzone }
     private var decisionColor: Color { isDeleting ? Theme.Colors.delete : Theme.Colors.keep }
     private var decisionIcon: String { isDeleting ? "trash.fill" : "checkmark.circle.fill" }
     private var decisionText: String { isDeleting ? "DELETE" : "KEEP" }
     private var dragFraction: CGFloat { min(abs(offset.width) / threshold, 1) }
+    private var feedbackFraction: CGFloat { min(abs(offset.width) / (threshold * 0.6), 1) }
 
     var body: some View {
         Color.clear
@@ -30,7 +34,7 @@ struct SwipeCardView: View {
                     .scaledToFill()
             }
             .overlay {
-                decisionColor.opacity(offset.width == 0 ? 0 : dragFraction * 0.45)
+                decisionColor.opacity(showsFeedback ? feedbackFraction * 0.45 : 0)
             }
             .overlay {
                 VStack(spacing: Theme.Spacing.sm) {
@@ -42,7 +46,7 @@ struct SwipeCardView: View {
                 .foregroundStyle(.white)
                 .padding(Theme.Spacing.lg)
                 .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.button))
-                .opacity(offset.width == 0 ? 0 : dragFraction)
+                .opacity(showsFeedback ? feedbackFraction : 0)
             }
             .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.card))
             .overlay {
@@ -57,6 +61,7 @@ struct SwipeCardView: View {
                 DragGesture()
                     .onChanged { value in
                         offset = value.translation
+                        committedDelete = value.translation.width > 0
                     }
                     .onEnded { value in
                         if value.translation.width > threshold {
@@ -64,7 +69,11 @@ struct SwipeCardView: View {
                         } else if value.translation.width < -threshold {
                             flyAway(delete: false)
                         } else {
-                            withAnimation(.spring) { offset = .zero }
+                            withAnimation(.spring(duration: 0.3, bounce: 0)) {
+                                offset = .zero
+                            } completion: {
+                                committedDelete = nil
+                            }
                         }
                     }
             )
